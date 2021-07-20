@@ -1,11 +1,11 @@
-let game = {
+const game = {
 
     lockMode: false,
     firstCard: null,
     secondCard: null,
 
-    setCard: function(id) {
-        let card = this.cards.filter((card) => card.id === id)[0];
+    setCard(id) {
+        let card = this.cards.filter( card => card.id === id)[0];
         console.log(card)
 
         if(card.flipped || this.lockMode) {
@@ -25,26 +25,26 @@ let game = {
         }
     },
 
-    checkMatch: function() {
+    checkMatch() {
         if (!this.firstCard || !this.secondCard) return false;
 
         return this.firstCard.icon === this.secondCard.icon
     },
 
-    clearCards: function() {
+    clearCards() {
         this.firstCard = null
         this.secondCard = null
         this.lockMode = false
     },
 
-    unflipCards: function() {
+    unflipCards() {
         this.firstCard.flipped = false,
         this.secondCard.flipped = false,
         this.clearCards()
     },
 
-    checkGameOver: function() {
-       return this.cards.filter((card) => !card.flipped).length == 0
+    checkGameOver() {
+       return this.cards.filter( card => !card.flipped).length == 0
     },
 
     techs: ['vue',
@@ -60,19 +60,19 @@ let game = {
 
     cards: null,
 
-    createCardsFromTechs: function() {
+    createCardsFromTechs() {
         this.cards = []
     
-        this.techs.forEach((tech) => {
+        this.techs.forEach( tech => {
             this.cards.push(this.createPairFromTech(tech))
         })
     
-        this.cards = this.cards.flatMap((pair) => pair)
+        this.cards = this.cards.flatMap( pair => pair)
         this.shuffleCards()
         return this.cards
     },
     
-    createPairFromTech: function(tech)  {
+    createPairFromTech(tech)  {
         return [
             {
                 id: this.createIdWithTech(tech),
@@ -87,11 +87,11 @@ let game = {
         ]
     },
 
-    createIdWithTech: function(tech) {
-        return tech + parseInt(Math.random() * 1000)
+    createIdWithTech(tech) {
+        return tech + Math.round(Math.random() * 1000)
     },
 
-    shuffleCards: function() { 
+    shuffleCards() { 
         let currentIndex = this.cards.length;
         let randomIndex = 0
     

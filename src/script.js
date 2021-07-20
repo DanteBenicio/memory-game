@@ -3,7 +3,7 @@ const back = "card-back"
 const cardClass = 'card'
 const icon = 'icon'
 
-startGame()
+onload = startGame()
 
 function startGame() {
     initializeCards(game.createCardsFromTechs())
@@ -14,8 +14,9 @@ function initializeCards() {
 
     gameBoard.innerHTML = ''
 
-    game.cards.forEach((card) => {
-        let cardElement = document.createElement('div')
+    game.cards.forEach( card => {
+        const cardElement = document.createElement('div')
+
         cardElement.id = card.id
         cardElement.classList.add(cardClass)
         cardElement.dataset.icon = card.icon
@@ -90,4 +91,3 @@ function restart() {
         gameOverLayer.style.display = 'none'
     }, 500)
 }
-// createCardsFromTechs(techs)
